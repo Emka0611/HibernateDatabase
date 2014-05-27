@@ -1,10 +1,17 @@
 package com.example.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Unit
 {
-	private long id;
+	private int id;
 	private String name;
 
+	public Unit()
+	{
+		
+	}
 	public Unit(String name)
 	{
 		this.name = name;
@@ -18,6 +25,16 @@ public class Unit
 	public long getId()
 	{
 		return id;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 
 	@Override

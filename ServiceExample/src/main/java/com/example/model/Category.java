@@ -1,30 +1,43 @@
 package com.example.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Category
 {
-	private long m_id;
-	private String mName;
+	private int id;
+	private String name;
 	
-	public Category(long id, String name)
+	public Category(int id, String name)
 	{
-		m_id = id;
-		mName = name;
+		this.id = id;
+		this.name = name;
 	}
 	
 	public String getName()
 	{
-		return mName;
+		return name;
 	}
 	
 	public long getId()
 	{
-		return m_id;
+		return id;
 	}
 	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
 	@Override
 	public String toString()
 	{
-		return mName;
+		return name;
 	}
 	
 }

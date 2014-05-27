@@ -2,34 +2,43 @@ package com.example.model;
 
 public class Barcode
 {
-	private long m_id;
-	private String m_barcode;
-	private Product m_product;
+	private long id;
+	private String barcode;
+	private Product product;
 
 	public long getId()
 	{
-		return m_id;
+		return id;
 	}
 	
 	public String getBarcode()
 	{
-		return m_barcode;
+		return barcode;
 	}
 
 	public Product getProduct()
 	{
-		return m_product;
+		return product;
 	}
 	
 	public void setProduct(Product product)
 	{
-		m_product = product;
+		this.product = product;
 	}
 	
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+
+	public void setBarcode(String barcode)
+	{
+		this.barcode = barcode;
+	}
+
 	@Override
 	public String toString()
 	{
-		return m_barcode;
+		return barcode;
 	}
-
 }

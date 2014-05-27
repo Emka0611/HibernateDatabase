@@ -10,19 +10,19 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.example.model.Activity;
+import com.example.model.Unit;
 
-public class ActivityClient
+public class UnitClient
 {
 
 	private Client client;
 	
-	public ActivityClient()
+	public UnitClient()
 	{
 		client = ClientBuilder.newClient();
 	}
 	
-	public Activity get(String id)
+	public Unit get(String id)
 	{
 		//http://localhost:8080/ServiceExample/webapi/activities/1234
 		WebTarget target = client.target("http://localhost:8080/ServiceExample/webapi");
@@ -34,20 +34,20 @@ public class ActivityClient
 		}	
 		else
 		{
-			return response.readEntity(Activity.class);
+			return response.readEntity(Unit.class);
 		}		
 	}
 	
-	public List<Activity> get()
+	public List<Unit> get()
 	{
 		//http://localhost:8080/ServiceExample/webapi/activities/1234
 		WebTarget target = client.target("http://localhost:8080/ServiceExample/webapi");
-		List<Activity> response = target.path("activities/").request(MediaType.APPLICATION_JSON).get(new GenericType<List<Activity>>() {});
+		List<Unit> response = target.path("activities/").request(MediaType.APPLICATION_JSON).get(new GenericType<List<Unit>>() {});
 		
 		return response;
 	}
 
-	public Activity create(Activity activity)
+	public Unit create(Unit activity)
 	{
 		WebTarget target = client.target("http://localhost:8080/ServiceExample/webapi");
 		Response response = target.path("activities/activity")
@@ -60,12 +60,12 @@ public class ActivityClient
 		}	
 		else
 		{
-			return response.readEntity(Activity.class);
+			return response.readEntity(Unit.class);
 		}		
 
 	}
 
-	public Activity update(Activity activity)
+	public Unit update(Unit activity)
 	{
 		WebTarget target = client.target("http://localhost:8080/ServiceExample/webapi");
 		
@@ -79,7 +79,7 @@ public class ActivityClient
 		}	
 		else
 		{
-			return response.readEntity(Activity.class);
+			return response.readEntity(Unit.class);
 		}		
 	}
 

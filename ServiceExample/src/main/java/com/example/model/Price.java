@@ -2,47 +2,77 @@ package com.example.model;
 
 public class Price
 {
-	private long m_id;
-	private Product m_product;
-	private double m_price;
-	private Unit m_unit;
-	private double m_quantity;
+	private long id;
+	private Product product;
+	private double price;
+	private Unit unit;
+	private double quantity;
 	
-	private String m_date;
+	private String date;
 
 	public long getId()
 	{
-		return m_id;
+		return id;
 	}
 	
 	public Product getProduct()
 	{
-		return m_product;
+		return product;
 	}
 	
 	public double getPrice()
 	{
-		return m_price;
+		return price;
 	}
 	
 	public Unit getUnit()
 	{
-		return m_unit;
+		return unit;
 	}
 	
 	public String getDate()
 	{
-		return m_date;
+		return date;
 	}
 	
+	public double getQuantity()
+	{
+		return quantity;
+	}
+
+	public void setQuantity(double quantity)
+	{
+		this.quantity = quantity;
+	}
+
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+
+	public void setPrice(double price)
+	{
+		this.price = price;
+	}
+
+	public void setUnit(Unit unit)
+	{
+		this.unit = unit;
+	}
+
+	public void setDate(String date)
+	{
+		this.date = date;
+	}
+
 	public void setProduct(Product product)
 	{
-		m_product = product;
+		this.product = product;
 	}
 	
 	public double getUnitPrice()
 	{
-		double unitPrice = m_price/m_quantity;
+		double unitPrice = price/quantity;
 		unitPrice *= 100;
 		unitPrice = Math.round(unitPrice);
 	    unitPrice/= 100; 
@@ -54,10 +84,10 @@ public class Price
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(m_price);
+		builder.append(price);
 		builder.append("zl ");
 		builder.append(getUnitPrice() + "zl/");
-		builder.append(m_unit.getName());
+		builder.append(unit.getName());
 		return builder.toString();
 	}
 
@@ -65,7 +95,7 @@ public class Price
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(getUnitPrice() + "zl/");
-		builder.append(m_unit.getName());
+		builder.append(unit.getName());
 		return builder.toString();
 	}
 
