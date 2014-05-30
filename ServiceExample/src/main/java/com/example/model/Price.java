@@ -2,7 +2,7 @@ package com.example.model;
 
 public class Price
 {
-	private long id;
+	private int id;
 	
 	private Product product;
 	private double price;
@@ -58,7 +58,7 @@ public class Price
 		this.quantity = quantity;
 	}
 
-	public void setId(long id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
