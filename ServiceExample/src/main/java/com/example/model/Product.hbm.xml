@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 30, 2014 1:17:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.example.model.Product" table="PRODUCTS">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        
+        <list name="priceHistory" table="PRICES" inverse="true">
+            <key>
+                <column name="PRODUCT_ID" />
+            </key>
+            <list-index column="POSITION"/>
+            <one-to-many class="com.example.model.Price" />
+        </list>
+        
+    </class>
+</hibernate-mapping>

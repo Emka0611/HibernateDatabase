@@ -3,6 +3,7 @@ package com.example.model;
 public class Barcode
 {
 	private long id;
+	
 	private String barcode;
 	private Product product;
 

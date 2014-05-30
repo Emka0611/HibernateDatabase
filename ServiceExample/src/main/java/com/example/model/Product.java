@@ -1,16 +1,35 @@
 package com.example.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Product implements Comparable<Product>
 {
 	private int id;
 
 	private String name;
-	private Category category;
-	private List<Price> priceHistory;
-	private List<Barcode> barcodesList;
+	//private Category category;
+	private List<Price> priceHistory = new ArrayList<Price>();
+	//private List<Barcode> barcodesList;
 	
+	public Product()
+	{
+		
+	}
+	
+	public Product(String name)
+	{
+		this.name = name;;
+	}
+	
+/*	public Product(String name, Category category)
+	{
+		this.name = name;
+		this.category = category;
+	}*/
 
 	public long getId()
 	{
@@ -22,10 +41,10 @@ public class Product implements Comparable<Product>
 		return name;
 	}
 
-	public Category getCategory()
+/*	public Category getCategory()
 	{
 		return category;
-	}
+	}*/
 	
 	public List<Price> getPriceHistory()
 	{
@@ -36,17 +55,7 @@ public class Product implements Comparable<Product>
 	{
 		this.priceHistory = priceHistory;
 	}
-
-	public List<Barcode> getBarcodesList()
-	{
-		return barcodesList;
-	}
-
-	public void setBarcodesList(List<Barcode> barcodesList)
-	{
-		this.barcodesList = barcodesList;
-	}
-
+	
 	public void setId(int id)
 	{
 		this.id = id;
@@ -57,21 +66,15 @@ public class Product implements Comparable<Product>
 		this.name = name;
 	}
 
-	public void setCategory(Category category)
+/*	public void setCategory(Category category)
 	{
 		this.category = category;
-	}
+	}*/
 
 	public void addPrice(Price price)
 	{
 		price.setProduct(this);
 		priceHistory.add(price);
-	}
-
-	public void addBarcode(Barcode barcode)
-	{
-		barcode.setProduct(this);
-		barcodesList.add(barcode);
 	}
 
 	@Override

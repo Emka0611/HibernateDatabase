@@ -24,15 +24,15 @@ public class UnitRepositoryStub implements UnitRepository
 		session.save(unit);
 		session.getTransaction().commit();
 	
-		session.beginTransaction();		
-		Unit loadedUnit = (Unit) session.get(Unit.class, 1);
-		session.getTransaction().commit();	
+		//session.beginTransaction();		
+		//Unit loadedUnit = (Unit) session.get(Unit.class, 1);
+		//session.getTransaction().commit();	
 		
 		session.close();
 		HibernateUtilities.getSessionFactory().close();
 		
 		List<Unit> units = new ArrayList<Unit>();
-		units.add(loadedUnit);
+		units.add(unit);
 		
 		return units;
 	}

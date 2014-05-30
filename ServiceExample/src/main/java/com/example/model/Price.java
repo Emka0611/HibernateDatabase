@@ -3,13 +3,26 @@ package com.example.model;
 public class Price
 {
 	private long id;
+	
 	private Product product;
 	private double price;
-	private Unit unit;
+	//private Unit unit;
 	private double quantity;
 	
 	private String date;
 
+	public Price()
+	{
+		
+	}
+	
+	public Price(Product product, double price, /*Unit unit,*/ double quantity)
+	{
+		this.product=product;
+		this.price=price;
+		//this.unit=unit;
+		this.quantity=quantity;
+	}
 	public long getId()
 	{
 		return id;
@@ -25,10 +38,10 @@ public class Price
 		return price;
 	}
 	
-	public Unit getUnit()
+/*	public Unit getUnit()
 	{
 		return unit;
-	}
+	}*/
 	
 	public String getDate()
 	{
@@ -55,10 +68,10 @@ public class Price
 		this.price = price;
 	}
 
-	public void setUnit(Unit unit)
+/*	public void setUnit(Unit unit)
 	{
 		this.unit = unit;
-	}
+	}*/
 
 	public void setDate(String date)
 	{
@@ -87,7 +100,7 @@ public class Price
 		builder.append(price);
 		builder.append("zl ");
 		builder.append(getUnitPrice() + "zl/");
-		builder.append(unit.getName());
+		//builder.append(unit.getName());
 		return builder.toString();
 	}
 
@@ -95,7 +108,7 @@ public class Price
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(getUnitPrice() + "zl/");
-		builder.append(unit.getName());
+		//builder.append(unit.getName());
 		return builder.toString();
 	}
 

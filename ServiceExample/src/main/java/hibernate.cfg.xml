@@ -9,7 +9,10 @@
   <property name="hibernate.connection.username">emka</property>
   <property name="hibernate.default_schema">emka</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
   <property name="hibernate.show_sql">true</property>
   <mapping resource="com/example/model/Unit.hbm.xml"/>
+  <mapping resource="com/example/model/Product.hbm.xml"/>
+  <mapping resource="com/example/model/Price.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
