@@ -18,19 +18,18 @@ public class ProductRepositoryStub implements ProductRepository
 		List<Product> products = new ArrayList<Product>();
 				
 		Session session = HibernateUtilities.getSessionFactory().openSession();
+		
 		session.beginTransaction();
-		
-		//Unit unit = new Unit("kg");
-		
 		Product prod = new Product("Produkt");
-		
-		prod.addPrice(new Price(prod,10,10));
-		prod.addPrice(new Price(prod,15,10));
-		
+		prod.addPrice(new Price());
+		prod.addPrice(new Price());	
 		session.save(prod);
 		session.getTransaction().commit();
 		
-		products.add(prod);
+		session.close();
+		HibernateUtilities.getSessionFactory().close();
+		
+		//products.add(prod);
 		return products;
 	}
 

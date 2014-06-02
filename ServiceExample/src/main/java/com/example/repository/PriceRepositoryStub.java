@@ -23,7 +23,6 @@ public class PriceRepositoryStub implements PriceRepository
 		session.getTransaction().commit();
 	
 		session.beginTransaction();		
-		Unit loadedUnit = (Unit) session.get(Unit.class, 1);
 		session.getTransaction().commit();	
 		
 		session.close();

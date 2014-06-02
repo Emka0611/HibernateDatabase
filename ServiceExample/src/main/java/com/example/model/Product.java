@@ -31,7 +31,7 @@ public class Product implements Comparable<Product>
 		this.category = category;
 	}*/
 
-	public long getId()
+	public int getId()
 	{
 		return id;
 	}

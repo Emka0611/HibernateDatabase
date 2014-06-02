@@ -4,23 +4,15 @@
 <!-- Generated May 30, 2014 1:17:05 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.example.model.Price" table="PRICES">
-        <id name="id" type="long" access="field">
+        
+        <id name="id" type="int">
             <column name="ID" />
-            <generator class="increment" />
+            <generator class="identity" />
         </id>
         
         <many-to-one name="product" class="com.example.model.Product" not-null="true">
-            <column name="PRODUCT" />
+            <column name="PRODUCT_ID" />
         </many-to-one>
         
-        <property name="price" type="double" access="field">
-            <column name="PRICE" />
-        </property>
-        <property name="quantity" type="double" access="field">
-            <column name="QUANTITY" />
-        </property>
-        <property name="date" type="java.lang.String" access="field">
-            <column name="DATE" />
-        </property>
     </class>
 </hibernate-mapping>
