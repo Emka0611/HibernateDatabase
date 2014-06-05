@@ -14,6 +14,7 @@
 		<mapping class="com.example.model.Unit"/>
 		<mapping class="com.example.model.Category"/>
 		<mapping class="com.example.model.Price"/>
+		<mapping class="com.example.model.Barcode"/>
 		<mapping class="com.example.model.Product"/>
 
 	</session-factory>

@@ -21,27 +21,9 @@ public class Barcode
 	@Column(name = "BARCODE")
 	private String barcode;
 	
-	
-	private Product product;
-
 	public int getId()
 	{
 		return id;
-	}
-	
-	public String getBarcode()
-	{
-		return barcode;
-	}
-
-	public Product getProduct()
-	{
-		return product;
-	}
-	
-	public void setProduct(Product product)
-	{
-		this.product = product;
 	}
 	
 	public void setId(int id)
@@ -49,6 +31,11 @@ public class Barcode
 		this.id = id;
 	}
 
+	public String getBarcode()
+	{
+		return barcode;
+	}
+	
 	public void setBarcode(String barcode)
 	{
 		this.barcode = barcode;

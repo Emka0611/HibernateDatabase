@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +34,7 @@ public class Price
 	private double quantity;
 	
 	@Column(name = "DATE")
-	private String date;
+	private Date date;
 
 	public Price()
 	{
@@ -44,6 +46,7 @@ public class Price
 		this.price=price;
 		this.unit=unit;
 		this.quantity=quantity;
+		this.date = new Date();
 	}
 	public int getId()
 	{
@@ -60,7 +63,7 @@ public class Price
 		return unit;
 	}
 	
-	public String getDate()
+	public Date getDate()
 	{
 		return date;
 	}
@@ -90,7 +93,7 @@ public class Price
 		this.unit = unit;
 	}
 
-	public void setDate(String date)
+	public void setDate(Date date)
 	{
 		this.date = date;
 	}

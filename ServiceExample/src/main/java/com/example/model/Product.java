@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -37,6 +36,9 @@ public class Product implements Comparable<Product>
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Price> priceHistory = new ArrayList<Price>();
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Barcode> barcodesList = new ArrayList<Barcode>();
+	
 	public Product()
 	{
 		
@@ -53,9 +55,19 @@ public class Product implements Comparable<Product>
 		return id;
 	}
 
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
 	public String getName()
 	{
 		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 
 	public Category getCategory()
@@ -63,6 +75,11 @@ public class Product implements Comparable<Product>
 		return category;
 	}
 	
+	public void setCategory(Category category)
+	{
+		this.category = category;
+	}
+
 	public List<Price> getPriceHistory()
 	{
 		return priceHistory;
@@ -73,24 +90,30 @@ public class Product implements Comparable<Product>
 		this.priceHistory = priceHistory;
 	}
 	
-	public void setId(int id)
-	{
-		this.id = id;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public void setCategory(Category category)
-	{
-		this.category = category;
-	}
-
 	public void addPrice(Price price)
 	{
 		priceHistory.add(price);
+	}
+
+	public List<Barcode> getBarcodesList()
+	{
+		return barcodesList;
+	}
+
+	public void setBarcodesList(List<Barcode> barcodesList)
+	{
+		this.barcodesList = barcodesList;
+	}
+
+	public void addBarcode(Barcode barcode)
+	{
+		barcodesList.add(barcode);		
+	}
+
+	@Override
+	public int compareTo(Product arg)
+	{
+		return getName().compareTo(arg.getName());
 	}
 
 	@Override
@@ -99,11 +122,5 @@ public class Product implements Comparable<Product>
 		StringBuilder builder = new StringBuilder();
 		builder.append(name);
 		return builder.toString();
-	}
-
-	@Override
-	public int compareTo(Product arg)
-	{
-		return getName().compareTo(arg.getName());
 	}
 }

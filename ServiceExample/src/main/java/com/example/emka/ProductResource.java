@@ -14,13 +14,12 @@ import com.example.model.Product;
 import com.example.model.Unit;
 import com.example.repository.HibernateRepository;
 import com.example.repository.ProductRepository;
-import com.example.repository.ProductRepositoryStub;
 import com.example.repository.Repository;
 
 @Path("products") // http://localhost:8080/ServiceExample/webapi/products
 public class ProductResource
 {
-	private ProductRepository productRepository = new ProductRepositoryStub();
+	private ProductRepository productRepository = new ProductRepository();
 	private Repository<Category> categoryRepository = new HibernateRepository<Category>(Category.class);
 	private Repository<Unit> unitRepository = new HibernateRepository<Unit>(Unit.class);
 	
@@ -29,7 +28,7 @@ public class ProductResource
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public List<Product> getAllProducts()
 	{
-		return productRepository.findAllProducts();
+		return productRepository.findAll();
 	}
 	
 	@GET
@@ -39,7 +38,7 @@ public class ProductResource
 	{
 		Category category = categoryRepository.findById(categoryID);
 		Product product = new Product(name, category);
-		return productRepository.saveProduct(product);
+		return productRepository.create(product);
 	}
 
 	@GET

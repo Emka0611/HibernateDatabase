@@ -2,20 +2,126 @@ package com.example.repository;
 
 import java.util.List;
 
+import org.hibernate.Session;
+
+import com.example.databaseutilities.HibernateUtilities;
+import com.example.model.Barcode;
 import com.example.model.Price;
 import com.example.model.Product;
 
-public interface ProductRepository
+public class ProductRepository implements Repository<Product>
 {
 
-	List<Product> findAllProducts();
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> findAll()
+	{
+		List<Product> products = null;
+		Session session = HibernateUtilities.getSessionFactory().openSession();
 
-	Product saveProduct(Product product);
-	
-	Product findById(int id);
-	
-	List<Price> findAllPrices();
+		session.beginTransaction();
+		products = session.createQuery(
+				"from Product p left join fetch p.priceHistory").list();
+		session.getTransaction().commit();
 
-	Product addPrice(int productID, Price price);
+		session.close();
+		return products;
+	}
+
+	@Override
+	public Product create(Product product)
+	{
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		session.saveOrUpdate(product);
+		session.getTransaction().commit();
+
+		session.close();
+		return product;
+	}
+
+	@Override
+	public Product findById(int id)
+	{
+		Product element = null;
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		element = (Product) session
+				.createQuery("from Product p where p.id = :ID")
+				.setParameter("ID", id).uniqueResult();
+
+		return element;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Price> findAllPrices()
+	{
+		List<Price> prices = null;
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		prices = session.createQuery("from Price").list();
+
+/*		for (Iterator<Price> iter = prices.iterator(); iter.hasNext();)
+		{
+			Price element = (Price) iter.next();
+			Hibernate.initialize(element.getUnit());
+		}*/
+
+		session.getTransaction().commit();
+
+		session.close();
+		return prices;
+	}
+
+	public Product addPrice(int productID, Price price)
+	{
+		Product element = null;
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		element = (Product) session.load(Product.class, productID);
+
+		element.addPrice(price);
+		
+		session.saveOrUpdate(element);
+		session.getTransaction().commit();
+
+		session.close();
+		return element;
+	}
+	
+	public Product addBarcode(int productID, Barcode barcode)
+	{
+		Product element = null;
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		element = (Product) session.load(Product.class, productID);
+
+		element.addBarcode(barcode);
+		
+		session.saveOrUpdate(element);
+		session.getTransaction().commit();
+
+		session.close();
+		return element;
+	}
+
+	@Override
+	public Product update(Product element)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(int id)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 
 }
