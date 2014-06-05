@@ -1,13 +1,30 @@
 package com.example.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@Table(name = "BARCODES")
+@XmlRootElement
 public class Barcode
 {
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
 	
+	@Column(name = "BARCODE")
 	private String barcode;
+	
+	
 	private Product product;
 
-	public long getId()
+	public int getId()
 	{
 		return id;
 	}
@@ -27,7 +44,7 @@ public class Barcode
 		this.product = product;
 	}
 	
-	public void setId(long id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
