@@ -1,7 +1,9 @@
 package com.example.repository;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 import com.example.databaseutilities.HibernateUtilities;
@@ -20,8 +22,14 @@ public class ProductRepository implements Repository<Product>
 		Session session = HibernateUtilities.getSessionFactory().openSession();
 
 		session.beginTransaction();
-		products = session.createQuery(
-				"from Product p left join fetch p.priceHistory").list();
+		products = session.createQuery("from Product").list();
+		
+		for (Iterator<Product> iter = products.iterator(); iter.hasNext();)
+		{
+			Product element = (Product) iter.next();
+			Hibernate.initialize(element.getBarcodesList());
+			Hibernate.initialize(element.getPriceHistory());
+		}
 		session.getTransaction().commit();
 
 		session.close();
@@ -64,12 +72,6 @@ public class ProductRepository implements Repository<Product>
 		session.beginTransaction();
 		prices = session.createQuery("from Price").list();
 
-/*		for (Iterator<Price> iter = prices.iterator(); iter.hasNext();)
-		{
-			Price element = (Price) iter.next();
-			Hibernate.initialize(element.getUnit());
-		}*/
-
 		session.getTransaction().commit();
 
 		session.close();
@@ -85,14 +87,14 @@ public class ProductRepository implements Repository<Product>
 		element = (Product) session.load(Product.class, productID);
 
 		element.addPrice(price);
-		
+
 		session.saveOrUpdate(element);
 		session.getTransaction().commit();
 
 		session.close();
 		return element;
 	}
-	
+
 	public Product addBarcode(int productID, Barcode barcode)
 	{
 		Product element = null;
@@ -102,7 +104,7 @@ public class ProductRepository implements Repository<Product>
 		element = (Product) session.load(Product.class, productID);
 
 		element.addBarcode(barcode);
-		
+
 		session.saveOrUpdate(element);
 		session.getTransaction().commit();
 
@@ -121,7 +123,7 @@ public class ProductRepository implements Repository<Product>
 	public void delete(int id)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
