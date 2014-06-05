@@ -37,8 +37,7 @@ public class Price
 	private Date date;
 
 	public Price()
-	{
-		
+	{		
 	}
 	
 	public Price(double price, Unit unit, double quantity)

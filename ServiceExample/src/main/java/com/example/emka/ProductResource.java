@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.example.model.Barcode;
 import com.example.model.Category;
 import com.example.model.Price;
 import com.example.model.Product;
@@ -56,6 +57,15 @@ public class ProductResource
 	{
 		Unit unit = unitRepository.findById(unitID);
 		productRepository.addPrice(productID, new Price(10, unit, 10));
+		return productRepository.findById(productID);
+	}
+	
+	@GET
+	@Path("/{productID}/addBarcode/{barcode}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Product addPrice(@PathParam("productID") int productID, @PathParam("barcode") String barcode)
+	{
+		productRepository.addBarcode(productID, new Barcode(barcode));
 		return productRepository.findById(productID);
 	}
 }

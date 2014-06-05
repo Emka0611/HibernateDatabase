@@ -40,8 +40,7 @@ public class Product implements Comparable<Product>
 	private List<Barcode> barcodesList = new ArrayList<Barcode>();
 	
 	public Product()
-	{
-		
+	{		
 	}
 	
 	public Product(String name, Category category)

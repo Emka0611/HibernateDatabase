@@ -17,15 +17,24 @@ public class Barcode
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private int id;
-	
+
 	@Column(name = "BARCODE")
 	private String barcode;
-	
+
+	public Barcode()
+	{
+	}
+
+	public Barcode(String barcode)
+	{
+		this.barcode = barcode;
+	}
+
 	public int getId()
 	{
 		return id;
 	}
-	
+
 	public void setId(int id)
 	{
 		this.id = id;
@@ -35,7 +44,7 @@ public class Barcode
 	{
 		return barcode;
 	}
-	
+
 	public void setBarcode(String barcode)
 	{
 		this.barcode = barcode;
