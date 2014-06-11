@@ -13,16 +13,16 @@ import com.example.model.Category;
 import com.example.model.Price;
 import com.example.model.Product;
 import com.example.model.Unit;
-import com.example.repository.HibernateRepository;
-import com.example.repository.ProductRepository;
 import com.example.repository.Repository;
+import com.example.repository.ProductRepository;
+import com.example.repository.IRepository;
 
 @Path("products") // http://localhost:8080/ServiceExample/webapi/products
 public class ProductResource
 {
 	private ProductRepository productRepository = new ProductRepository();
-	private Repository<Category> categoryRepository = new HibernateRepository<Category>(Category.class);
-	private Repository<Unit> unitRepository = new HibernateRepository<Unit>(Unit.class);
+	private IRepository<Category> categoryRepository = new Repository<Category>(Category.class);
+	private IRepository<Unit> unitRepository = new Repository<Unit>(Unit.class);
 	
 	
 	@GET

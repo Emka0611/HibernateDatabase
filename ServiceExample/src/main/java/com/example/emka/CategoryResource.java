@@ -9,13 +9,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.example.model.Category;
-import com.example.repository.HibernateRepository;
 import com.example.repository.Repository;
+import com.example.repository.IRepository;
 
 @Path("categories") // http://localhost:8080/ServiceExample/webapi/categories
 public class CategoryResource
 {
-	private Repository<Category> categoryRepository = new HibernateRepository<Category>(Category.class);
+	private IRepository<Category> categoryRepository = new Repository<Category>(Category.class);
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

@@ -15,13 +15,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.example.model.Unit;
-import com.example.repository.HibernateRepository;
 import com.example.repository.Repository;
+import com.example.repository.IRepository;
 
 @Path("units") // http://localhost:8080/ServiceExample/webapi/units
 public class UnitResource
 {
-	private Repository<Unit> unitRepository = new HibernateRepository<Unit>(Unit.class);
+	private IRepository<Unit> unitRepository = new Repository<Unit>(Unit.class);
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

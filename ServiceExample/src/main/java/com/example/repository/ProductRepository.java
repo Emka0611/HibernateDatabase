@@ -11,9 +11,8 @@ import com.example.model.Barcode;
 import com.example.model.Price;
 import com.example.model.Product;
 
-public class ProductRepository implements Repository<Product>
+public class ProductRepository implements IRepository<Product>
 {
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll()
