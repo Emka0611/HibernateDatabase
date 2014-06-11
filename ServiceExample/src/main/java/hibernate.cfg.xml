@@ -4,10 +4,10 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.password">emkaemka</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.default_schema">emka</property>
+		<property name="hibernate.connection.password">2e9988e6</property>
+		<property name="hibernate.connection.url">jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_emka</property>
+		<property name="hibernate.connection.username">b555b40afd2070</property>
+		<property name="hibernate.default_schema">cb_emka</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		
