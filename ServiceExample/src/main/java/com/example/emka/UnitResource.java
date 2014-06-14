@@ -28,21 +28,20 @@ public class UnitResource
 	public List<Unit> getAllUnits()
 	{
 		return unitRepository.findAll();
-	}
+	}	
 	
-	
-	@GET
-	@Path("/add/{name}")
+	@POST
+	@Path("/add")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Unit addUnit(@PathParam("name") String name)
+	public Unit addUnit(Unit unit)
 	{
-		Unit unit = new Unit(name);
 		return unitRepository.create(unit);
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	@Path("{unitId}") // http://localhost:8080/ServiceExample/webapi/units/1234
+	@Path("/{unitId}") // http://localhost:8080/ServiceExample/webapi/units/1234
 	public Response getUnit(@PathParam("unitId") int unitId)
 	{
 		if(unitId <0)
@@ -59,19 +58,8 @@ public class UnitResource
 		return Response.ok().entity(unit).build();
 	}
 	
-	
-	@DELETE
-	@Path("{unitId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response delete(@PathParam("unitId") int unitId)
-	{
-		unitRepository.delete(unitId);
-		return Response.ok().build();
-	}
-	
 	@PUT
-	@Path("activity/{activityId}")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response update(Unit unit)
@@ -80,13 +68,12 @@ public class UnitResource
 		return Response.ok().entity(unit).build();
 	}
 	
-	@POST
-	@Path("unit") // http://localhost:8080/ServiceExample/webapi/units/unit // params -> MultivaluedMap<String, String>
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@DELETE
+	@Path("/delete/{unitId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Unit createUnitParams(String param)
+	public Response delete(@PathParam("unitId") int unitId)
 	{
-		Unit u = new Unit(param);
-		return unitRepository.create(u);			
+		unitRepository.delete(unitId);
+		return Response.ok().build();
 	}
 }

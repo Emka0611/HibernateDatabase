@@ -46,6 +46,8 @@ public class Repository<T> implements IRepository<T>
 		session.beginTransaction();
 		element = (T) session.createQuery("from " + getPersistentClass().getSimpleName() + " p where p.id = :ID").setParameter("ID", id).uniqueResult();
 		
+		session.getTransaction().commit();
+		session.close();
 		return element;
 	}
 

@@ -2,28 +2,24 @@ package com.example.emka;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import com.example.model.Barcode;
-import com.example.model.Category;
-import com.example.model.Price;
 import com.example.model.Product;
-import com.example.model.Unit;
-import com.example.repository.Repository;
 import com.example.repository.ProductRepository;
-import com.example.repository.IRepository;
 
-@Path("products") // http://localhost:8080/ServiceExample/webapi/products
+@Path("products")
 public class ProductResource
 {
-	private ProductRepository productRepository = new ProductRepository();
-	private IRepository<Category> categoryRepository = new Repository<Category>(Category.class);
-	private IRepository<Unit> unitRepository = new Repository<Unit>(Unit.class);
-	
+	private ProductRepository productRepository = new ProductRepository(Product.class);
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -31,41 +27,56 @@ public class ProductResource
 	{
 		return productRepository.findAll();
 	}
-	
-	@GET
-	@Path("/add/{name}/{categoryID}")
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Product addNewProduct(@PathParam("name") String name, @PathParam("categoryID") int categoryID)
-	{
-		Category category = categoryRepository.findById(categoryID);
-		Product product = new Product(name, category);
-		return productRepository.create(product);
-	}
 
 	@GET
-	@Path("/{productID}")
+	@Path("/{productId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Product getProduct(@PathParam("productID") int productID)
+	public Product getProductById(@PathParam("productId") int productID)
 	{
 		return productRepository.findById(productID);
 	}
 	
 	@GET
-	@Path("/{productID}/addPrice/{unitID}")
+	@Path("/product/name/{productName}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Product addPrice(@PathParam("productID") int productID, @PathParam("unitID") int unitID)
+	public Product getProductByName(@PathParam("productName") String productName)
 	{
-		Unit unit = unitRepository.findById(unitID);
-		productRepository.addPrice(productID, new Price(10, unit, 10));
-		return productRepository.findById(productID);
+		return productRepository.findByName(productName);
 	}
 	
 	@GET
-	@Path("/{productID}/addBarcode/{barcode}")
+	@Path("/product/catId/{categoryId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Product addPrice(@PathParam("productID") int productID, @PathParam("barcode") String barcode)
+	public List<Product> findProductsByCategory(@PathParam("categoryId") int categoryId)
 	{
-		productRepository.addBarcode(productID, new Barcode(barcode));
-		return productRepository.findById(productID);
+		return productRepository.findProductsByCategory(categoryId);
+	}
+	
+	@POST
+	@Path("/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Product addNewProduct(Product product)
+	{
+		return productRepository.create(product);
+	}
+	
+	@PUT
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response update(Product product)
+	{
+		productRepository.update(product);		
+		return Response.ok().entity(product).build();
+	}
+	
+	@DELETE
+	@Path("/delete/{productId}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response delete(@PathParam("productId") int productId)
+	{
+		productRepository.delete(productId);
+		return Response.ok().build();
 	}
 }
